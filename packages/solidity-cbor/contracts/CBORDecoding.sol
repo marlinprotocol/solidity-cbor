@@ -26,7 +26,7 @@ library CBORDecoding {
      */
     function decodeMapping(
         bytes memory encoding
-    ) external view returns(
+    ) internal view returns(
         bytes[2][] memory decodedData
     ) {
         uint cursor = 0;
@@ -52,7 +52,7 @@ library CBORDecoding {
      */
     function decodeArray(
         bytes memory encoding
-    ) external view returns(
+    ) internal view returns(
         bytes[] memory decodedData
     ) {
         uint cursor = 0;
@@ -78,7 +78,7 @@ library CBORDecoding {
      */
     function decodePrimitive(
         bytes memory encoding
-    ) external view returns(
+    ) internal view returns(
         bytes memory decodedData
     ) {
         uint cursor = 0;
@@ -110,7 +110,7 @@ library CBORDecoding {
     function decodeMappingGetValue(
         bytes memory encoding,
         bytes memory searchKey
-    ) external view returns(
+    ) internal view returns(
         bytes memory value
     ) {
         // Search parameters
@@ -173,7 +173,7 @@ library CBORDecoding {
     function decodeArrayGetIndex(
         bytes memory encoding,
         bytes memory searchKey
-    ) external view returns(
+    ) internal view returns(
         uint64 index
     ) {
         // Search parameters
@@ -222,7 +222,7 @@ library CBORDecoding {
     function decodeArrayGetItem(
         bytes memory encoding,
         uint64 index
-    ) external view returns(
+    ) internal view returns(
         bytes memory value
     ) {
         // Search parameters

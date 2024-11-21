@@ -6,13 +6,10 @@ import cbor from "cbor";
 import { toHex } from "web3-utils";
 import {
     // eslint-disable-next-line camelcase
-    CBORDecoding__factory,
-    // eslint-disable-next-line camelcase
     CBORTesting__factory,
     CBORTesting,
 } from "../typechain";
 import { toExpectedValue } from "./helpers/testUtils";
-import { ContractFactory } from "ethers/lib/ethers";
 
 describe("CBORDecoding.sol", function () {
     this.timeout(60_000);
@@ -20,23 +17,13 @@ describe("CBORDecoding.sol", function () {
     let decoder: CBORTesting;
     // eslint-disable-next-line camelcase
     let CBORTestingFactory: CBORTesting__factory;
-    // eslint-disable-next-line camelcase
-    let CBORDecodingFactory: CBORDecoding__factory;
-    let ByteParserFactory: ContractFactory;
 
     let value;
     let decoded;
     let call;
 
     before(async () => {
-        CBORDecodingFactory = await ethers.getContractFactory("CBORDecoding");
-        ByteParserFactory = await ethers.getContractFactory("ByteParser");
-        CBORTestingFactory = await ethers.getContractFactory("CBORTesting", {
-            libraries: {
-                CBORDecoding: (await CBORDecodingFactory.deploy()).address,
-                ByteParser: (await ByteParserFactory.deploy()).address,
-            },
-        });
+        CBORTestingFactory = await ethers.getContractFactory("CBORTesting");
         // Deploy our decoder library
         decoder = await CBORTestingFactory.deploy();
     });

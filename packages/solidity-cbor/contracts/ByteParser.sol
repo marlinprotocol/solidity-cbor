@@ -14,7 +14,7 @@ library ByteParser {
      * @param data dynamic bytes array
      * @return value calculated uint64 value
      */
-    function bytesToUint64(bytes memory data) public pure returns (uint64 value) {
+    function bytesToUint64(bytes memory data) internal pure returns (uint64 value) {
         require(value <= MAX_UINT64, "Number too large! Use `bytesToBigNumber` instead!");
         value = uint64(bytesToBigNumber(data));
     }
@@ -24,7 +24,7 @@ library ByteParser {
      * @param data dynamic bytes array
      * @return value calculated uint64 value
      */
-    function bytesToNegativeInt128(bytes memory data) public pure returns (int128 value) {
+    function bytesToNegativeInt128(bytes memory data) internal pure returns (int128 value) {
         value = -1 - int64(bytesToUint64(data));
     }
 
@@ -33,7 +33,7 @@ library ByteParser {
      * @param data dynamic bytes array
      * @return value converted string object
      */
-    function bytesToString(bytes memory data) public pure returns (string memory value) {
+    function bytesToString(bytes memory data) internal pure returns (string memory value) {
         value = string(data);
     }
 
@@ -42,7 +42,7 @@ library ByteParser {
      * @param data dynamic bytes array
      * @return value calculated uint256 value
      */
-    function bytesToBigNumber(bytes memory data) public pure returns (uint value) {
+    function bytesToBigNumber(bytes memory data) internal pure returns (uint value) {
         require(data.length <= 64, "Value too large!");
         for (uint i = 0; i < data.length; i++)
             value += uint8(data[i])*uint(2**(8*(data.length-(i+1))));
@@ -53,7 +53,7 @@ library ByteParser {
      * @param data dynamic bytes array
      * @return value calculated bool value
      */
-    function bytesToBool(bytes memory data) public pure returns (bool value) {
+    function bytesToBool(bytes memory data) internal pure returns (bool value) {
         require(data.length == 1, "Data is not a boolean!");
         uint8 boolean = uint8(data[0]);
         if (boolean == 1)
@@ -69,7 +69,7 @@ library ByteParser {
      * @param data dynamic bytes array
      * @return value translated address
      */
-    function parseAddr(bytes memory data) public pure returns (address value) {
+    function parseAddr(bytes memory data) internal pure returns (address value) {
         /**
          * The following function has been written by the Oraclize team, use it under the terms of the MIT license.
          * https://github.com/provable-things/ethereum-api/blob/9f34daaa550202c44f48cdee7754245074bde65d/oraclizeAPI_0.5.sol#L872-L898

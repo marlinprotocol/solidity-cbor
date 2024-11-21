@@ -18,7 +18,7 @@ library CBORByteUtils {
         bytes memory _data,
         uint _start,
         uint _end
-    ) internal view returns (
+    ) internal pure returns (
         bytes memory slicedData
     ) {
         uint256 _length = _end - _start;
@@ -89,7 +89,7 @@ library CBORByteUtils {
      */
     function bytesToUint256(
         bytes memory data
-    ) internal view returns (
+    ) internal pure returns (
         uint256 value
     ) {
         for (uint i = 0; i < data.length; i++)

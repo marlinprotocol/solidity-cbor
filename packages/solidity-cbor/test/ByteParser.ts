@@ -4,16 +4,11 @@ import { ethers } from "hardhat";
 import cbor from "cbor";
 import {
     // eslint-disable-next-line camelcase
-    CBORDecoding__factory,
-    // eslint-disable-next-line camelcase
     CBORTesting__factory,
     CBORTesting,
-    // eslint-disable-next-line camelcase
-    // ByteParser__factory,
     // eslint-disable-next-line node/no-missing-import
 } from "../typechain";
 // eslint-disable-next-line node/no-missing-import
-import { ContractFactory } from "ethers/lib/ethers";
 
 describe("ByteParser.sol", function () {
     this.timeout(60_000);
@@ -22,19 +17,9 @@ describe("ByteParser.sol", function () {
     // eslint-disable-next-line camelcase
     let CBORTestingFactory: CBORTesting__factory;
     // eslint-disable-next-line camelcase
-    let CBORDecodingFactory: CBORDecoding__factory;
-    // eslint-disable-next-line camelcase
-    let ByteParserFactory: ContractFactory;
 
     before(async () => {
-        CBORDecodingFactory = await ethers.getContractFactory("CBORDecoding");
-        ByteParserFactory = await ethers.getContractFactory("ByteParser");
-        CBORTestingFactory = await ethers.getContractFactory("CBORTesting", {
-            libraries: {
-                CBORDecoding: (await CBORDecodingFactory.deploy()).address,
-                ByteParser: (await ByteParserFactory.deploy()).address,
-            },
-        });
+        CBORTestingFactory = await ethers.getContractFactory("CBORTesting");
 
         // Deploy our decoder library
         decoder = await CBORTestingFactory.deploy();
